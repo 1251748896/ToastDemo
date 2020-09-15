@@ -14,6 +14,7 @@
 		ACE565F025106C52009CA0F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACE565EF25106C52009CA0F8 /* Assets.xcassets */; };
 		ACE565F325106C52009CA0F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACE565F125106C52009CA0F8 /* LaunchScreen.storyboard */; };
 		ACE565F625106C52009CA0F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE565F525106C52009CA0F8 /* main.m */; };
+		ACE565FF25106C7B009CA0F8 /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE565FD25106C7B009CA0F8 /* Toast.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		ACE565F225106C52009CA0F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACE565F425106C52009CA0F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACE565F525106C52009CA0F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ACE565FD25106C7B009CA0F8 /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
+		ACE565FE25106C7B009CA0F8 /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toast.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 		ACE565E225106C4D009CA0F8 /* ToastDemo */ = {
 			isa = PBXGroup;
 			children = (
+				ACE565FC25106C7B009CA0F8 /* Toast */,
 				ACE565E325106C4D009CA0F8 /* AppDelegate.h */,
 				ACE565E425106C4D009CA0F8 /* AppDelegate.m */,
 				ACE565E625106C4D009CA0F8 /* SceneDelegate.h */,
@@ -74,6 +78,15 @@
 				ACE565F525106C52009CA0F8 /* main.m */,
 			);
 			path = ToastDemo;
+			sourceTree = "<group>";
+		};
+		ACE565FC25106C7B009CA0F8 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				ACE565FE25106C7B009CA0F8 /* Toast.h */,
+				ACE565FD25106C7B009CA0F8 /* Toast.m */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACE565FF25106C7B009CA0F8 /* Toast.m in Sources */,
 				ACE565EB25106C4D009CA0F8 /* ViewController.m in Sources */,
 				ACE565E525106C4D009CA0F8 /* AppDelegate.m in Sources */,
 				ACE565F625106C52009CA0F8 /* main.m in Sources */,

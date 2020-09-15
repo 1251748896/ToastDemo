@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,56 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bO9-JW-XTW">
+                                <rect key="frame" x="30" y="244" width="354" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="y5O-Kt-yND"/>
+                                </constraints>
+                                <state key="normal" title="显示message"/>
+                                <connections>
+                                    <action selector="show:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x3Y-kn-eSz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ek-zW-a3P">
+                                <rect key="frame" x="30" y="518" width="354" height="30"/>
+                                <state key="normal" title="停止Toast"/>
+                                <connections>
+                                    <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jrl-H9-XBU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QU-zd-TIo">
+                                <rect key="frame" x="30" y="388" width="354" height="30"/>
+                                <state key="normal" title="显示loading"/>
+                                <connections>
+                                    <action selector="loading:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eIk-Qf-8kz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9QU-zd-TIo" firstAttribute="leading" secondItem="bO9-JW-XTW" secondAttribute="leading" id="970-0B-veK"/>
+                            <constraint firstItem="7Ek-zW-a3P" firstAttribute="trailing" secondItem="9QU-zd-TIo" secondAttribute="trailing" id="ELP-QC-vaw"/>
+                            <constraint firstItem="9QU-zd-TIo" firstAttribute="trailing" secondItem="bO9-JW-XTW" secondAttribute="trailing" id="Ni1-aB-N8p"/>
+                            <constraint firstItem="bO9-JW-XTW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="QWq-Cj-d5o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bO9-JW-XTW" secondAttribute="trailing" constant="30" id="U9Z-sv-Oc7"/>
+                            <constraint firstItem="7Ek-zW-a3P" firstAttribute="height" secondItem="9QU-zd-TIo" secondAttribute="height" id="Z0f-vE-bCa"/>
+                            <constraint firstItem="9QU-zd-TIo" firstAttribute="top" secondItem="bO9-JW-XTW" secondAttribute="bottom" constant="100" id="aS9-yc-Qwz"/>
+                            <constraint firstItem="9QU-zd-TIo" firstAttribute="height" secondItem="bO9-JW-XTW" secondAttribute="height" multiplier="0.681818" id="c1Q-1v-3Ia"/>
+                            <constraint firstItem="bO9-JW-XTW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="iuv-XG-PrF"/>
+                            <constraint firstItem="7Ek-zW-a3P" firstAttribute="leading" secondItem="9QU-zd-TIo" secondAttribute="leading" id="lhs-qF-iSY"/>
+                            <constraint firstItem="7Ek-zW-a3P" firstAttribute="top" secondItem="9QU-zd-TIo" secondAttribute="bottom" constant="100" id="xRR-BR-1If"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="133" y="117"/>
         </scene>
     </scenes>
 </document>
