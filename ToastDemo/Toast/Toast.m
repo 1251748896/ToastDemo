@@ -14,8 +14,8 @@
 #define FONT_SIZE 16.0
 #define MARGIN 25 //toast背景view的margin
 #define INDICATOR_HEIGHT 30
-#define DEFAULTSHOWTIME 3 //秒
-
+#define DEFAULTSHOWTIME 3 //默认toast 秒
+#define DEFAULTLOADINGTIME 5 //默认loading 秒
 
 static UIView *loadingView;
 static UILabel *msgLabel;
@@ -25,11 +25,12 @@ static NSString *message;
 @implementation Toast
 
 + (void)show:(NSString *)msg time:(int)time {
-  [self hide];
-  message = msg;
-  if (!message || message.length == 0) {
+  
+  if (!msg || msg.length == 0) {
     return;
   }
+  [self hide];
+  message = msg;
   
   loadingView = [self makeToastView];
   loadingView.hidden = NO;
@@ -48,12 +49,18 @@ static NSString *message;
     [loadingView addSubview:msgLabel];
   }
   
-  [self handleShowTime:time];
+  [self handleShowTime:time isLoading:NO];
+}
+
++ (void)handleShowTime:(int)time isLoading:(BOOL)isLoading {
+  int defaultTime = isLoading ? DEFAULTLOADINGTIME : DEFAULTSHOWTIME;
+  int showTime = time >= 1 ? time : defaultTime;
+  showTime = showTime <= 30 ? showTime : defaultTime;
+  [self handleShowTime:showTime];
 }
 
 + (void)handleShowTime:(int)time {
-  NSInteger showTime = DEFAULTSHOWTIME;
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(showTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     [self hide];
   });
 }
@@ -67,15 +74,15 @@ static NSString *message;
   indicatorView = [self makeIndicatorView];
   [indicatorView startAnimating];
   
-  msgLabel = [self makeMsgLabel];
   if (msg && msg.length > 0) {
+    msgLabel = [self makeMsgLabel];
     [self handleMsgLabel];
   } else {
     loadingView.frame = CGRectMake(SCREEN_WIDTH/2 - VIEW_WIDTH/2, SCREEN_HEIGHT/2 - VIEW_WIDTH/2, VIEW_WIDTH, VIEW_WIDTH);
     indicatorView.center = CGPointMake(VIEW_WIDTH/2, VIEW_WIDTH/2);
   }
   
-  [self handleShowTime:time];
+  [self handleShowTime:time isLoading:YES];
   
 }
 
@@ -86,11 +93,14 @@ static NSString *message;
   if (indicatorView) {
     [indicatorView stopAnimating];
   }
+  if (msgLabel) {
+    msgLabel.text = @"";
+  }
   message = @"";
 }
 
 + (void)handleMsgLabel {
-  CGSize toastSize = [self calculatToastViewWidth:YES];
+  CGSize toastSize = [self calculatLoadingViewSize];
   CGSize textSize = [self calculatMessageSize];
   loadingView.frame = CGRectMake(SCREEN_WIDTH/2 - toastSize.width/2, SCREEN_HEIGHT/2 - toastSize.height/2, toastSize.width, toastSize.height);
   indicatorView.center = CGPointMake(toastSize.width/2, MARGIN + INDICATOR_HEIGHT/2);
@@ -162,7 +172,7 @@ static NSString *message;
   return size.size;
 }
 
-+ (CGSize)calculatToastViewWidth:(BOOL)isLoading {
++ (CGSize)calculatLoadingViewSize {
   CGSize size = [self calculatMessageSize];
   CGFloat tempW = size.width + MARGIN*2;
   CGFloat w = MAX(VIEW_WIDTH, tempW);
