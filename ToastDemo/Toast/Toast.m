@@ -45,9 +45,6 @@ static NSString *message;
   msgLabel.bounds = CGRectMake(0, 0, size.width, size.height);
   msgLabel.center = CGPointMake(viewW/2, viewH/2);
   msgLabel.text = message;
-  if (!msgLabel.superview) {
-    [loadingView addSubview:msgLabel];
-  }
   
   [self handleShowTime:time isLoading:NO];
 }
@@ -60,6 +57,7 @@ static NSString *message;
 }
 
 + (void)handleShowTime:(int)time {
+  NSLog(@"当前显示时间 = %d",time);
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     [self hide];
   });
@@ -113,11 +111,20 @@ static NSString *message;
 
 + (UIWindow *)currentWindow {
   UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+  
+  if (!window) {
+    NSLog(@"出现了不能预料的错误：window = nil");
+    return window;
+  }
+  
   return window;
 }
 
 + (UIView *)makeToastView {
   if (loadingView) {
+    if (!loadingView.superview) {
+      [[self currentWindow] addSubview:loadingView];
+    }
     return loadingView;
   }
   UIView *view = [[UIView alloc] init];
@@ -130,6 +137,9 @@ static NSString *message;
 
 +(UIActivityIndicatorView *)makeIndicatorView {
   if (indicatorView) {
+    if (!indicatorView.superview) {
+      [loadingView addSubview:indicatorView];
+    }
     return indicatorView;
   }
   UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -144,6 +154,9 @@ static NSString *message;
 
 + (UILabel *)makeMsgLabel {
   if (msgLabel) {
+    if (!msgLabel.superview) {
+      [loadingView addSubview:msgLabel];
+    }
     return msgLabel;
   }
   UILabel *label = [[UILabel alloc] init];
